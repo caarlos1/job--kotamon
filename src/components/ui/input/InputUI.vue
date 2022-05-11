@@ -83,9 +83,15 @@ const inputValue = computed({
 .input-ui__input {
   background-color: #ffffff;
   border: 2px solid #eaeaea;
-  height: 45px;
+  height: 50px;
   border-radius: 5px;
   text-indent: 15px;
+  font-family: "Mulish", sans-serif;
+  font-weight: 400;
+}
+
+.input-ui__input::placeholder {
+  color: #c1bebe;
 }
 
 .input-ui__input:focus {

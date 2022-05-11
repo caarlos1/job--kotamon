@@ -4,15 +4,17 @@ export interface PokemonCardProps {
   name: string;
   cod?: number;
   type: string;
+  click?: boolean;
 }
 
 withDefaults(defineProps<PokemonCardProps>(), {
   name: "",
+  click: false,
 });
 </script>
 
 <template>
-  <div class="card__container">
+  <div class="card__container" :class="{ clickable: click }">
     <div class="card__image">
       <img :src="image" :alt="name" />
     </div>
@@ -27,39 +29,53 @@ withDefaults(defineProps<PokemonCardProps>(), {
 <style scoped>
 .card__container {
   width: 100%;
-  max-width: 250px;
-  padding: 15px;
+  min-width: 120px;
+  max-width: 140px;
+  padding: 15px 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   background: #fff;
   border-radius: 15px;
-  filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0px 5px 5px #e1e1e1);
   align-items: center;
+  transition: all 0.4s ease;
 }
+
+.clickable:hover {
+  cursor: pointer;
+  transform: scale(110%);
+}
+
 .card__image img {
-  width: 80px;
+  width: 50px;
 }
 
 .card__name {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  padding: 10px 20px;
+  padding: 10px 20px 0px;
 }
 .card__cod {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .card__type {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   line-height: 2.2rem;
   font-weight: 700;
   width: 100%;
   background: rgba(247, 247, 247, 0.4);
   border-radius: 8px;
   color: #c4c4c4;
+}
+
+@media (max-width: 380px) {
+  .card__container {
+    min-width: 100%;
+  }
 }
 </style>

@@ -4,4 +4,5 @@ export const pokemon = {
   name: "Eevee",
   cod: 133,
   type: "normal",
+  click: true,
 };

@@ -54,8 +54,14 @@ h6 {
   font-family: "Mulish", sans-serif;
 }
 
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: rgba(196, 196, 196, 0.3) transparent;
+}
+
 *::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 *::-webkit-scrollbar-track {
@@ -63,9 +69,9 @@ h6 {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #78787850;
+  background-color: rgba(196, 196, 196, 0.3);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #787878ca;
+  background-color: rgba(196, 196, 196);
 }
