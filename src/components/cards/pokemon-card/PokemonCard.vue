@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import ImageBoxUI from "../../ui/image/ImageBoxUI.vue";
-
 export interface PokemonCardProps {
   image: string;
   name: string;
@@ -29,7 +27,7 @@ withDefaults(defineProps<PokemonCardProps>(), {
 <style scoped>
 .card__container {
   width: 100%;
-  max-width: 220px;
+  max-width: 250px;
   padding: 15px;
   display: flex;
   flex-direction: column;
