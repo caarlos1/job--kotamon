@@ -7,14 +7,24 @@ export interface PokemonCardProps {
   click?: boolean;
 }
 
-withDefaults(defineProps<PokemonCardProps>(), {
+const props = withDefaults(defineProps<PokemonCardProps>(), {
   name: "",
   click: false,
 });
+
+const emit = defineEmits(["card:click-card"]);
+
+const clickEvent = () => {
+  if (props.click) emit("card:click-card", props);
+};
 </script>
 
 <template>
-  <div class="card__container" :class="{ clickable: click }">
+  <div
+    class="card__container"
+    :class="{ clickable: click }"
+    @click="clickEvent"
+  >
     <div class="card__image">
       <img :src="image" :alt="name" />
     </div>
@@ -39,12 +49,19 @@ withDefaults(defineProps<PokemonCardProps>(), {
   border-radius: 15px;
   filter: drop-shadow(0px 5px 5px #e1e1e1);
   align-items: center;
-  transition: all 0.4s ease;
+  transition: all 0.2s ease;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .clickable:hover {
-  cursor: pointer;
   transform: scale(110%);
+}
+
+.clickable:active {
+  transform: scale(105%);
 }
 
 .card__image img {

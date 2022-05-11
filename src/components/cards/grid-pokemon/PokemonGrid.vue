@@ -6,6 +6,7 @@ import PokemonCard, {
 export interface PokemonGridProps {
   title: string;
   list: PokemonCardProps[];
+  actionCard: (card: PokemonCardProps) => void;
 }
 
 withDefaults(defineProps<PokemonGridProps>(), {
@@ -18,7 +19,12 @@ withDefaults(defineProps<PokemonGridProps>(), {
   <div class="grid__container">
     <h2 v-if="title" class="grid__title">{{ title }}</h2>
     <div class="grid__body">
-      <PokemonCard v-for="item in list" :key="item.cod" v-bind="item" />
+      <PokemonCard
+        v-for="item in list"
+        :key="item.cod"
+        v-bind="item"
+        @card:click-card="actionCard"
+      />
     </div>
   </div>
 </template>
