@@ -25,9 +25,10 @@ const search = () => {
   <div class="input-search__container">
     <InputUI
       v-model="inputSearch"
+      :placeholder="placeholder"
+      radius="50px"
       class="input-search__input"
       type="search"
-      :placeholder="placeholder"
       @keydown.enter="search"
     />
 

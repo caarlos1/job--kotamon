@@ -27,7 +27,7 @@ body {
   transition: color 0.5s, background-color 0.5s;
   font-size: 1.6rem;
   line-height: 1.6rem;
-  font-family: "Roboto", sans-serif;
+  font-family: "Quicksand", sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,6 +43,15 @@ a {
 
 a:hover {
   color: var(--color-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Mulish", sans-serif;
 }
 
 *::-webkit-scrollbar {

@@ -22,6 +22,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  radius: {
+    types: String,
+    default: "",
+  },
 });
 
 const vMaska = maska;
@@ -45,6 +49,7 @@ const inputValue = computed({
     <input
       v-if="mask.length"
       class="input-ui__input"
+      :style="{ borderRadius: radius }"
       v-bind="props"
       v-maska="mask"
       v-model="inputValue"
@@ -54,6 +59,7 @@ const inputValue = computed({
     <input
       v-else
       class="input-ui__input"
+      :style="{ borderRadius: radius }"
       v-bind="props"
       v-model="inputValue"
       :required="required"
@@ -77,7 +83,7 @@ const inputValue = computed({
 .input-ui__input {
   background-color: #ffffff;
   border: 2px solid #eaeaea;
-  height: 40px;
+  height: 45px;
   border-radius: 5px;
   text-indent: 15px;
 }
