@@ -1,10 +1,10 @@
 import DefaultTemplate from "./DefaultTemplate.vue";
 import TheMenu from "../../components/header/menu/TheMenu.vue";
 import InputSearchUI from "../../components/ui/input-search/InputSearchUI.vue";
-import PokemonGrid from "../../components/cards/grid-prokemon/PokemonGrid.vue";
+import PokemonGrid from "../../components/cards/grid-pokemon/PokemonGrid.vue";
 
 import { menu } from "../../components/header/menu/util/mock";
-import { pokemonList } from "../../components/cards/grid-prokemon/util/mock";
+import { pokemonList } from "../../components/cards/grid-pokemon/util/mock";
 
 import "./util/storybook.css";
 
