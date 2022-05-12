@@ -50,7 +50,9 @@ const handleInfiniteScroll = () => {
     footer.value as unknown as HTMLElement
   ).getBoundingClientRect();
 
-  if (footerPos.bottom <= window.innerHeight) requestData(true);
+  console.log(footerPos.bottom, window.innerHeight);
+
+  if (footerPos.bottom <= window.innerHeight - 20) requestData(true);
 };
 
 watch(
@@ -105,7 +107,11 @@ const toHome = () => {
 
 <template>
   <div class="page__home">
-    <InputSearchUI v-bind="page.search" @input-search:submit="searchPokemon" />
+    <InputSearchUI
+      class="page__search"
+      v-bind="page.search"
+      @input-search:submit="searchPokemon"
+    />
     <PokemonGrid
       v-bind="pokemons"
       :list="pokemonStore.getPokemons"
@@ -128,5 +134,14 @@ const toHome = () => {
 
 .page__footer {
   padding: 10px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .page__home {
+    gap: 0;
+  }
+  .page__search {
+    margin-bottom: 30px;
+  }
 }
 </style>

@@ -16,7 +16,11 @@ withDefaults(defineProps<DefaultTemplateProps>(), {
       <slot name="header"></slot>
     </div>
     <div class="body__template">
-      <div class="body__content" @scroll="scrollAction">
+      <div
+        class="body__content"
+        @scroll="scrollAction"
+        @touchend="scrollAction"
+      >
         <div class="body__center">
           <slot name="content"></slot>
         </div>
