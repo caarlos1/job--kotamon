@@ -105,6 +105,7 @@ const searchPokemon = (search = "") => {
 const toHome = () => {
   router.push({
     name: "home",
+    query: {},
   });
 };
 </script>

@@ -93,7 +93,9 @@ withDefaults(defineProps<PokemonGridProps>(), {
 }
 
 .grid__empty {
+  text-align: center;
   font-weight: 500;
+  line-height: 2rem;
 }
 
 .grid__footer {
