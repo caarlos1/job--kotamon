@@ -2,6 +2,7 @@
 import { usePokemonStore } from "@/stores/pokemon";
 import { onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
 import ListCard from "../../components/cards/list-card/ListCard.vue";
 import PokemonCard from "../../components/cards/pokemon-card/PokemonCard.vue";
 

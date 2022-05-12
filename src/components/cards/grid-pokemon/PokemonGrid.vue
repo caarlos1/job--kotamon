@@ -9,6 +9,9 @@ export interface PokemonGridProps {
   list: PokemonCardProps[];
   loading?: boolean;
   actionCard?: (card: PokemonCardProps) => void;
+  emptyText?: string;
+  emptyButton?: string;
+  emptyButtonAction?: () => void;
 }
 
 withDefaults(defineProps<PokemonGridProps>(), {
@@ -16,6 +19,11 @@ withDefaults(defineProps<PokemonGridProps>(), {
   list: () => [],
   loading: false,
   actionCard: () => {
+    return;
+  },
+  emptyText: "Nenhum pokemon encontrado...",
+  emptyButton: "",
+  emptyButtonAction: () => {
     return;
   },
 });
@@ -38,7 +46,15 @@ withDefaults(defineProps<PokemonGridProps>(), {
       <SpinnerUI v-if="loading" :size="6" />
 
       <div v-else-if="list.length == 0" class="grid__empty">
-        Nenhum pokemon encontrado...
+        {{ emptyText }}
+        <span v-if="emptyButton">
+          <a
+            href="#"
+            class="footer__empty-button"
+            @click.prevent="emptyButtonAction"
+            >{{ emptyButton }}
+          </a></span
+        >
       </div>
     </div>
   </div>
@@ -86,5 +102,9 @@ withDefaults(defineProps<PokemonGridProps>(), {
   align-items: center;
   justify-content: center;
   height: 60px;
+}
+
+.footer__empty-button {
+  font-weight: 700;
 }
 </style>

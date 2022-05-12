@@ -10,6 +10,8 @@ export default {
     size: 25,
     click: true,
     loading: false,
+    emptyText: "Nenhum bixo de bola encontrado...",
+    emptyButton: "",
   },
   argTypes: {},
   parameters: {

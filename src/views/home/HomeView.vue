@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { watch, onMounted, onUnmounted, reactive, ref } from "vue";
+import { watch, onMounted, onUnmounted, reactive, ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
 import InputSearchUI from "../../components/ui/input-search/InputSearchUI.vue";
@@ -24,11 +24,16 @@ const page = reactive({
 
 const pokemons = reactive({
   title: "Pokemons",
+  emptyButton: "Ver todos os pokemons!",
   loading: false,
 });
 
 const globalEvents = useGlobalEvents();
 const footer = ref(null);
+
+const emptyText = computed(() => {
+  return `Nenhum pokemon com cod/name "${route.query.search}" encontrado.`;
+});
 
 onMounted(async () => {
   globalEvents.listen("template:scroll", handleInfiniteScroll);
@@ -90,6 +95,12 @@ const searchPokemon = (search = "") => {
     },
   });
 };
+
+const toHome = () => {
+  router.push({
+    name: "home",
+  });
+};
 </script>
 
 <template>
@@ -99,6 +110,8 @@ const searchPokemon = (search = "") => {
       v-bind="pokemons"
       :list="pokemonStore.getPokemons"
       :action-card="toPokemonPage"
+      :empty-text="emptyText"
+      :empty-button-action="toHome"
     />
     <div ref="footer" class="page__footer"></div>
   </div>
