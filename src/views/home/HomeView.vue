@@ -12,6 +12,7 @@ import { useGlobalEvents } from "@/hooks/useGlobalEvents";
 const router = useRouter();
 const route = useRoute();
 const pokemonStore = usePokemonStore();
+const globalEvents = useGlobalEvents();
 
 const page = reactive({
   search: {
@@ -24,11 +25,10 @@ const page = reactive({
 
 const pokemons = reactive({
   title: "Pokemons",
-  emptyButton: "Ver todos os pokemons!",
   loading: false,
+  emptyButton: "Ver todos os pokemons!",
 });
 
-const globalEvents = useGlobalEvents();
 const footer = ref(null);
 
 const emptyText = computed(() => {

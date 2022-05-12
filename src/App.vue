@@ -8,6 +8,8 @@ import TheMenu from "./components/header/menu/TheMenu.vue";
 import "./assets/reset.css";
 import "./assets/root.css";
 
+import { useGlobalEvents } from "./hooks/useGlobalEvents";
+
 const page = reactive({
   menu: {
     logo: {
@@ -20,10 +22,16 @@ const page = reactive({
       "https://gravatar.com/avatar/9a82ba52769cbc22951a7cf516124307?s=250",
   },
 });
+
+const globalEvents = useGlobalEvents();
+
+const emitScroll = (e: UIEvent) => {
+  globalEvents.emit<UIEvent>("template:scroll", e);
+};
 </script>
 
 <template>
-  <DefaultTemplate>
+  <DefaultTemplate :scroll-action="emitScroll">
     <template #header>
       <TheMenu v-bind="page.menu" />
     </template>

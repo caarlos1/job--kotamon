@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import { useGlobalEvents } from "../../hooks/useGlobalEvents";
+export interface DefaultTemplateProps {
+  scrollAction: (e: UIEvent) => void;
+}
 
-defineProps({
-  showSidebar: {
-    type: Boolean,
-    default: false,
+withDefaults(defineProps<DefaultTemplateProps>(), {
+  scrollAction: () => {
+    return;
   },
 });
-
-const globalEvents = useGlobalEvents();
-
-const emitScroll = (e: UIEvent) => {
-  globalEvents.emit<UIEvent>("template:scroll", e);
-};
-
-defineEmits([]);
 </script>
 
 <template>
@@ -23,7 +16,7 @@ defineEmits([]);
       <slot name="header"></slot>
     </div>
     <div class="body__template">
-      <div class="body__content" @scroll="emitScroll">
+      <div class="body__content" @scroll="scrollAction">
         <div class="body__center">
           <slot name="content"></slot>
         </div>

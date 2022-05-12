@@ -1,52 +1,51 @@
-# job--kotamon
+# Kotamon
 
-This template should help get you started developing with Vue 3 in Vite.
+[![wakatime](https://wakatime.com/badge/user/f7d2af3a-edb4-4cf9-b88c-56c89386c124/project/197db5f2-61b5-4484-a5c9-7f3b265f8aff.svg)](https://wakatime.com/badge/user/f7d2af3a-edb4-4cf9-b88c-56c89386c124/project/197db5f2-61b5-4484-a5c9-7f3b265f8aff)
 
-## Recommended IDE Setup
+Projeto desenvolvido para concorrer a vaga de Desenvolvedor Front-End na empresa Kotas.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
+## Projeto
 
-## Type Support for `.vue` Imports in TS
+[![Netlify Status](https://api.netlify.com/api/v1/badges/26708a23-b151-4c68-bbd6-5ff184ac4992/deploy-status)](https://app.netlify.com/sites/kotamon/deploys)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Principal: https://kotamon.caarlos.com
+- Secundária: https://kotamon.netlify.app
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Storybook
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/390e8b7c-dd42-453a-802a-f4e89eba2b44/deploy-status)](https://app.netlify.com/sites/sb-kotamon/deploys)
 
-## Customize configuration
+- Principal: https://sb-kotamon.caarlos.com
+- Secundária: https://sb-kotamon.netlify.app
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Configurações
 
 ```sh
-npm install
+yarn install
 ```
 
-### Compile and Hot-Reload for Development
+### Projeto
 
 ```sh
-npm run dev
+yarn dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Storybook
 
 ```sh
-npm run build
+yarn storybook
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Build
+
+### Projeto
 
 ```sh
-npm run test:unit
+yarn build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Storybook
 
 ```sh
-npm run lint
+yarn build-storybook
 ```
