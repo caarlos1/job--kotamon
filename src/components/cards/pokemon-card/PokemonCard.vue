@@ -5,24 +5,27 @@ export interface PokemonCardProps {
   cod?: number;
   type: string;
   click?: boolean;
+  abilities?: string[];
+  disableClick?: boolean;
 }
 
 const props = withDefaults(defineProps<PokemonCardProps>(), {
   name: "",
   click: false,
+  disableClick: false,
 });
 
 const emit = defineEmits(["card:click-card"]);
 
 const clickEvent = () => {
-  if (props.click) emit("card:click-card", props);
+  if (props.click && !props.disableClick) emit("card:click-card", props);
 };
 </script>
 
 <template>
   <div
     class="card__container"
-    :class="{ clickable: click }"
+    :class="{ clickable: click && !disableClick }"
     @click="clickEvent"
   >
     <div class="card__image">
@@ -50,6 +53,7 @@ const clickEvent = () => {
   filter: drop-shadow(0px 5px 5px #e1e1e1);
   align-items: center;
   transition: all 0.2s ease;
+  text-align: center;
 }
 
 .clickable {
@@ -65,7 +69,7 @@ const clickEvent = () => {
 }
 
 .card__image img {
-  width: 50px;
+  width: 80px;
 }
 
 .card__name {

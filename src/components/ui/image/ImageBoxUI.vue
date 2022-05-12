@@ -3,7 +3,7 @@ import { onDeactivated, reactive } from "vue";
 import { ImageIcon } from "../../icons";
 
 export interface ImageUIProps {
-  title: string;
+  title?: string;
   url: string;
   radius?: string;
   minHeight?: string;

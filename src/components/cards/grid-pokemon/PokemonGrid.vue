@@ -4,14 +4,17 @@ import PokemonCard, {
 } from "../pokemon-card/PokemonCard.vue";
 
 export interface PokemonGridProps {
-  title: string;
+  title?: string;
   list: PokemonCardProps[];
-  actionCard: (card: PokemonCardProps) => void;
+  actionCard?: (card: PokemonCardProps) => void;
 }
 
 withDefaults(defineProps<PokemonGridProps>(), {
   title: "",
   list: () => [],
+  actionCard: () => {
+    return;
+  },
 });
 </script>
 

@@ -19,7 +19,7 @@ defineEmits(["menu:open-favorite", "menu:open-cart"]);
   <div class="menu__container">
     <TheLogo v-bind="logo" />
     <div v-if="userImage" class="menu__user">
-      <ImageBoxUI :url="userImage" class="" radius="20px" min-height="40px" />
+      <ImageBoxUI :url="userImage" radius="20px" min-height="40px" />
     </div>
   </div>
 </template>
