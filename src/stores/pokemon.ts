@@ -17,14 +17,16 @@ export const usePokemonStore = defineStore({
   state: () => ({
     pokemons: [] as PokemonCardProps[],
     isolatedPokemons: [] as PokemonCardProps[],
+    searchItems: [] as PokemonCardProps[],
     abilities: [] as AbilityPerPokemon[],
     page: 0,
-    search: "",
+    search: false,
     firstRequest: true,
   }),
 
   getters: {
-    getPokemons: (state) => state.pokemons,
+    getPokemons: (state) => (state.search ? state.searchItems : state.pokemons),
+    getSearch: (state) => state.searchItems,
     getPokemon: (state) => {
       return {
         abilities: (idPokemon: number) => {
@@ -45,35 +47,25 @@ export const usePokemonStore = defineStore({
 
   actions: {
     async requestPokemons(search = "", manual = false) {
-      if (manual || this.firstRequest) {
-        this.firstRequest = false;
+      if (search) this.search = true;
+      else this.search = false;
 
-        if (search && this.search != search) this.firstRequest = true;
-        else {
-          if (this.search) this.firstRequest = true;
-        }
+      if (manual || this.firstRequest || this.pokemons.length == 0 || search) {
+        this.firstRequest = false;
 
         try {
           const pokeReq: PokeInfo[] = [];
 
           if (search) {
-            if (this.search != search) {
-              this.page = 0;
-              this.pokemons = [];
-              this.search = search;
+            try {
+              this.searchItems = pokemonCardAdapter(
+                [await pokeAPI.about(search)],
+                true
+              );
+            } catch (err) {
+              this.searchItems = [];
             }
-
-            this.page++;
-            // pokeReq.push(
-            //   ...(await pokeAPI.search(search, this.page)).results
-            // );
           } else {
-            if (this.search) {
-              this.page = 0;
-              this.pokemons = [];
-              this.search = "";
-            }
-
             this.page++;
             pokeReq.push(...(await pokeAPI.get(this.page)));
           }

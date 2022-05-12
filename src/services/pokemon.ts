@@ -31,7 +31,7 @@ export class PokeAPI {
     return pokeInfoList;
   }
 
-  public async about(pokeId: number): Promise<PokeInfo> {
+  public async about(pokeId: number | string): Promise<PokeInfo> {
     return (
       await api.get<PokeInfo>(`/pokemon/${pokeId}`, {
         baseURL: pokeAPI,

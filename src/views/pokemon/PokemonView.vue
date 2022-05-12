@@ -62,6 +62,12 @@ const toHome = () => {
   gap: 30px;
 }
 
+@media (max-width: 380px) {
+  .pokemon__info {
+    flex-direction: column;
+  }
+}
+
 .page__footer {
   width: 100%;
   text-align: center;

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { onMounted, reactive } from "vue";
-import { useRouter } from "vue-router";
+import { watch, onMounted, reactive } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
 import InputSearchUI from "../../components/ui/input-search/InputSearchUI.vue";
 import PokemonGrid from "../../components/cards/grid-pokemon/PokemonGrid.vue";
@@ -9,6 +9,7 @@ import type { PokemonCardProps } from "@/components/cards/pokemon-card/PokemonCa
 import { usePokemonStore } from "@/stores/pokemon";
 
 const router = useRouter();
+const route = useRoute();
 const pokemonStore = usePokemonStore();
 
 const page = reactive({
@@ -18,7 +19,22 @@ const page = reactive({
   grid: {
     title: "Pokemons",
   },
+  loading: true,
 });
+
+const requestData = async (manual = false) => {
+  page.loading = true;
+  try {
+    let search = "";
+    if (route.query && route.query.search)
+      search = route.query.search as string;
+
+    pokemonStore.requestPokemons(search, manual);
+  } catch (err) {
+    console.log(err);
+  }
+  page.loading = false;
+};
 
 const toPokemonPage = (pokemon: PokemonCardProps) => {
   router.push({
@@ -29,18 +45,30 @@ const toPokemonPage = (pokemon: PokemonCardProps) => {
   });
 };
 
+const searchPokemon = (search = "") => {
+  router.push({
+    name: "home",
+    query: {
+      search,
+    },
+  });
+};
+
 onMounted(async () => {
-  try {
-    pokemonStore.requestPokemons();
-  } catch (err) {
-    console.log(err);
-  }
+  await requestData();
 });
+
+watch(
+  () => route.query,
+  async () => {
+    requestData();
+  }
+);
 </script>
 
 <template>
   <div class="page__home">
-    <InputSearchUI v-bind="page.search" />
+    <InputSearchUI v-bind="page.search" @input-search:submit="searchPokemon" />
     <PokemonGrid
       v-bind="page.grid"
       :list="pokemonStore.getPokemons"
