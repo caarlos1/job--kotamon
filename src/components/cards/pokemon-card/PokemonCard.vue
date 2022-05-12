@@ -68,12 +68,14 @@ const clickEvent = () => {
   cursor: pointer;
 }
 
-.clickable:hover {
-  transform: scale(110%);
-}
+@media (min-width: 600px) {
+  .clickable:hover {
+    transform: scale(110%);
+  }
 
-.clickable:active {
-  transform: scale(105%);
+  .clickable:active {
+    transform: scale(105%);
+  }
 }
 
 .card__image img {
@@ -85,6 +87,7 @@ const clickEvent = () => {
   font-weight: 700;
   padding: 10px 20px 0px;
 }
+
 .card__cod {
   font-size: 1.2rem;
   font-weight: 700;

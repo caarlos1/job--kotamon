@@ -35,6 +35,7 @@ const toHome = () => {
   <div class="page__pokemon">
     <div class="pokemon__info" v-if="getPoke(pokeId) && getAbilities(pokeId)">
       <PokemonCard
+        class="pokemon__card"
         v-if="getPoke(pokeId)"
         v-bind="getPoke(pokeId)"
         disable-click
@@ -61,6 +62,18 @@ const toHome = () => {
   display: flex;
   align-items: flex-start;
   gap: 30px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .page__pokemon,
+  .pokemon__info {
+    gap: 0;
+  }
+
+  .pokemon__card,
+  .pokemon__info {
+    margin-bottom: 30px;
+  }
 }
 
 @media (max-width: 380px) {
