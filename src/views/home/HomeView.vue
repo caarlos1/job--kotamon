@@ -8,6 +8,7 @@ import type { PokemonCardProps } from "@/components/cards/pokemon-card/PokemonCa
 
 import { usePokemonStore } from "@/stores/pokemon";
 import { useGlobalEvents } from "@/hooks/useGlobalEvents";
+import { takeABreak } from "@/util/functions";
 
 const router = useRouter();
 const route = useRoute();
@@ -46,13 +47,12 @@ onUnmounted(() => {
 
 const handleInfiniteScroll = () => {
   if (page.requesting.pokemon) return;
+
   const footerPos = (
     footer.value as unknown as HTMLElement
   ).getBoundingClientRect();
 
-  console.log(footerPos.bottom, window.innerHeight);
-
-  if (footerPos.bottom <= window.innerHeight - 20) requestData(true);
+  if (footerPos.bottom <= window.innerHeight) requestData(true);
 };
 
 watch(
@@ -65,6 +65,7 @@ watch(
 const requestData = async (manual = false) => {
   if (page.requesting.pokemon) return;
 
+  page.requesting.pokemon = true;
   pokemons.loading = true;
 
   try {
@@ -76,7 +77,10 @@ const requestData = async (manual = false) => {
   } catch (err) {
     console.log(err);
   }
+
   pokemons.loading = false;
+
+  await takeABreak(250);
   page.requesting.pokemon = false;
 };
 

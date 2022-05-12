@@ -42,7 +42,7 @@ withDefaults(defineProps<PokemonGridProps>(), {
       />
     </div>
 
-    <div class="grid__footer">
+    <div v-if="loading || list.length == 0" class="grid__footer">
       <SpinnerUI v-if="loading" :size="6" />
 
       <div v-else-if="list.length == 0" class="grid__empty">
