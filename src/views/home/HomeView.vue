@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { watch, onMounted, reactive } from "vue";
+import { watch, onMounted, onUnmounted, reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
 import InputSearchUI from "../../components/ui/input-search/InputSearchUI.vue";
@@ -7,6 +7,7 @@ import PokemonGrid from "../../components/cards/grid-pokemon/PokemonGrid.vue";
 import type { PokemonCardProps } from "@/components/cards/pokemon-card/PokemonCard.vue";
 
 import { usePokemonStore } from "@/stores/pokemon";
+import { useGlobalEvents } from "@/hooks/useGlobalEvents";
 
 const router = useRouter();
 const route = useRoute();
@@ -16,24 +17,60 @@ const page = reactive({
   search: {
     placeholder: "Pesquise por nome ou código...",
   },
-  grid: {
-    title: "Pokemons",
+  requesting: {
+    pokemon: false,
   },
-  loading: true,
 });
 
+const pokemons = reactive({
+  title: "Pokemons",
+  loading: false,
+});
+
+const globalEvents = useGlobalEvents();
+const footer = ref(null);
+
+onMounted(async () => {
+  globalEvents.listen("template:scroll", handleInfiniteScroll);
+  await requestData();
+});
+
+onUnmounted(() => {
+  globalEvents.off("template:scroll", handleInfiniteScroll);
+});
+
+const handleInfiniteScroll = () => {
+  if (page.requesting.pokemon) return;
+  const footerPos = (
+    footer.value as unknown as HTMLElement
+  ).getBoundingClientRect();
+
+  if (footerPos.bottom <= window.innerHeight) requestData(true);
+};
+
+watch(
+  () => route.query,
+  async () => {
+    if (route.name == "home") requestData();
+  }
+);
+
 const requestData = async (manual = false) => {
-  page.loading = true;
+  if (page.requesting.pokemon) return;
+
+  pokemons.loading = true;
+
   try {
     let search = "";
     if (route.query && route.query.search)
       search = route.query.search as string;
 
-    pokemonStore.requestPokemons(search, manual);
+    await pokemonStore.requestPokemons(search, manual);
   } catch (err) {
     console.log(err);
   }
-  page.loading = false;
+  pokemons.loading = false;
+  page.requesting.pokemon = false;
 };
 
 const toPokemonPage = (pokemon: PokemonCardProps) => {
@@ -53,28 +90,17 @@ const searchPokemon = (search = "") => {
     },
   });
 };
-
-onMounted(async () => {
-  await requestData();
-});
-
-watch(
-  () => route.query,
-  async () => {
-    requestData();
-  }
-);
 </script>
 
 <template>
   <div class="page__home">
     <InputSearchUI v-bind="page.search" @input-search:submit="searchPokemon" />
     <PokemonGrid
-      v-bind="page.grid"
+      v-bind="pokemons"
       :list="pokemonStore.getPokemons"
       :action-card="toPokemonPage"
     />
-    <div class="page__footer"></div>
+    <div ref="footer" class="page__footer"></div>
   </div>
 </template>
 

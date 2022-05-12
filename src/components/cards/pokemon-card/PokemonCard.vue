@@ -56,6 +56,14 @@ const clickEvent = () => {
   text-align: center;
 }
 
+@supports (-webkit-touch-callout: none) {
+  .card__container {
+    filter: none;
+    border: 1px solid #dee4edca;
+    gap: 0;
+  }
+}
+
 .clickable {
   cursor: pointer;
 }

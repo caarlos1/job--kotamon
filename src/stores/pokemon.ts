@@ -19,6 +19,7 @@ export const usePokemonStore = defineStore({
     isolatedPokemons: [] as PokemonCardProps[],
     searchItems: [] as PokemonCardProps[],
     abilities: [] as AbilityPerPokemon[],
+    pokemonLimit: 50,
     page: 0,
     search: false,
     firstRequest: true,
@@ -66,6 +67,8 @@ export const usePokemonStore = defineStore({
               this.searchItems = [];
             }
           } else {
+            if (this.pokemons.length >= this.pokemonLimit) return;
+
             this.page++;
             pokeReq.push(...(await pokeAPI.get(this.page)));
           }

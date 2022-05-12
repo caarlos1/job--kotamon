@@ -9,6 +9,7 @@ export default {
     list: [],
     size: 25,
     click: true,
+    loading: false,
   },
   argTypes: {},
   parameters: {
